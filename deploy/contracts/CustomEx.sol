@@ -84,4 +84,28 @@ contract CustomDex {
       _transactionHistory(tokenName, etherToken, inputValue, outputValue);
       return outputValue;
    }
+
+   function swapTokenToEth(string memory tokenName, uint256 _amout) public returns(uint256) {
+      //convert the token amount(eth value) to exact amount(10)
+      uint256 exactAmount = _amout / 10 ** 18;
+      uint256 ethToBeTransferred = exactAmount * ethValue;
+
+      require(address(this).balance >= ethToBeTransferred, "Dex is running low on funds");
+
+      payable(msg.sender).transfer(ethToBeTransferred);
+      require(tokenInstanceMap[tokenName].transferFrom(msg.sender, address(this), _amout));
+
+      string memory etherToken = "Ether";
+
+      _transactionHistory(tokenName, etherToken, _amout, ethToBeTransferred);
+      return ethToBeTransferred;
+   }
+
+   function swapTokenToToken(string memory srcTokenName, string memory destTokenName, uint256 _amout) public {
+      require(tokenInstanceMap[srcTokenName].transferFrom(msg.sender, address(this), _amount))
+      require(tokenInstanceMap[destTokenName].transfer(msg.sender, _amount));
+
+      _transactionHistory(srcTokenName, destTokenName, _amout, _amout);
+
+   } 
 }
