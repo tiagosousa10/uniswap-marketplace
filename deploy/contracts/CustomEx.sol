@@ -47,4 +47,16 @@ contract CustomDex {
    function getTotalSupply(string memory tokenName) public view returns(uint256) {
       return tokenInstanceMap[tokenName].totalSupply();
    }
+
+   function getName(string memory tokenName) public view returns(string memory) {
+      return tokenInstanceMap[tokenName].name();
+   }
+
+   function getTokenAddress(string memory tokenName) public view returns(address) {
+      return address(tokenInstanceMap[tokenName]);
+   }
+
+   function getEthBalance() public view returns(uint256) {
+      return address(this).balance;
+   }
 }
