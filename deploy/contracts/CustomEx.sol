@@ -108,4 +108,19 @@ contract CustomDex {
       _transactionHistory(srcTokenName, destTokenName, _amout, _amout);
 
    } 
+
+   function getAllHistory() public view returns(History[] memory) {
+      uint256 itemCount = _historyIndex;
+      uint256 currentIndex = 0;
+
+      History[] memory items = new History[](itemCount);
+      for(uint256 i = 0; i < itemCount; i++) {
+         uint256 currentId = i + 1;
+         History storage currentItem = historys[currentId];
+         items[currentIndex] = currentItem;
+         currentIndex +=1;
+      }
+
+      return items;
+   }
 }
