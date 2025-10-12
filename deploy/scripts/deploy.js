@@ -1,7 +1,7 @@
 const hre = require("hardhat");
 
 async function main() {
-  const CustomEx = await hre.ethers.getContractFactory("CustomEx");
+  const CustomEx = await hre.ethers.getContractFactory("CustomDex");
   const customDex = await CustomEx.deploy();
 
   await customDex.deployed();

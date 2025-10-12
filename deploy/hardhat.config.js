@@ -1,17 +1,37 @@
+const { chainId } = require("wagmi");
+
 require("@nomicfoundation/hardhat-toolbox");
 
 /** @type import('hardhat/config').HardhatUserConfig */
 
-const NEXT_PUBLIC_POLYGON_MUMBAI_RPC = "https://rpc.ankr.com/polygon_mumbai";
-const NEXT_PUBLIC_PRIVATE_KEY = "YOUR_PRIVATE_KEY";
+const NETWORK_RPC_URL =
+  "https://rpc.ankr.com/eth_holesky/ec94445152204157c240ed5d4b76c35c8c5fd750ac76d6d594d7451d05ce7b60";
+const PRIVATE_KEY =
+  "a7b28ae46f500d3a383ef5823ed5e62aa9ea4956381c6a5e5da2cffd74bb6242";
 module.exports = {
   solidity: "0.8.0",
-  defaultNetwork: "matic",
   networks: {
     hardhat: {},
-    polygon_mumbai: {
-      url: NEXT_PUBLIC_POLYGON_MUMBAI_RPC,
-      accounts: [`0x${NEXT_PUBLIC_PRIVATE_KEY}`],
+    holesky: {
+      url: NETWORK_RPC_URL,
+      accounts: [`0x${PRIVATE_KEY}`],
+      chainId: 17000,
     },
   },
 };
+
+/* 
+networks: {
+    hardhat: {
+      chainId: 1337,
+    },
+    holesky: {
+      url: process.env.NETWORK_RPC_URL || process.env.NETWORK_RPC_URL,
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      chainId: 17000,
+    },
+  },
+
+
+*/
